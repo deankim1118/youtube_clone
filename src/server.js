@@ -1,0 +1,1 @@
+console.log("Hello, world. I'll be the best react developer in the world. Wait. God is with me")

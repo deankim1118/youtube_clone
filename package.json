@@ -1,0 +1,27 @@
+{
+  "name": "youtube_clone",
+  "version": "1.0.0",
+  "description": "Youtube Clone Project",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deankim1118/youtube_clone.git"
+  },
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "author": "Dean Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/deankim1118/youtube_clone/issues"
+  },
+  "homepage": "https://github.com/deankim1118/youtube_clone#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.3",
+    "nodemon": "^3.1.0"
+  }
+}

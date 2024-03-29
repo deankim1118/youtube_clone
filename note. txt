@@ -1,0 +1,13 @@
+. Install Node.js
+. git init -> git remote add origin ${url}
+. Install Express package using NPM
+. NPM init
+. Install Babel package => 최선 버전의 자바스크립트를 안정적인 버전으로 컨버트 해준다. -> Doc 참조.
+    - npm install @babel/node --save-dev 도 인스톨 해준다.
+    - add env preset & Create babel.config.json 
+. Install Nodemon package
+    - package.json 에 scripts 추가 
+    -  "scripts": {
+            "dev": "nodemon --exec babel-node index.js" }
+      이렇게 추가 해주고, 터미널에서 "npm run dev" 를 입력하면 자동으로 babel-node로 index.js를 실행해서 컨버팅해준다.
+      nodemon을 사용하면 npm run dev를 입력할 필요없이 변경사항이 있으면 자동으로 재실행 해준다.

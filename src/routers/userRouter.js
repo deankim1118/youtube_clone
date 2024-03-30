@@ -6,4 +6,5 @@ const userRouter = express.Router();
 userRouter.get("/edit", edit);
 userRouter.get("/remove", remove);
 
-export default userRouter;
+// export default userRouter;
+module.exports = userRouter;

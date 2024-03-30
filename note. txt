@@ -15,4 +15,4 @@
 . Start Building Server with Express
     ### useful package : morgan => HTTP request logger middleware for node.js
     .Thinking about domain url
-    .Make Router for each domain => Routers Module을 따로 만들어 주고 Controller(Handler) Module를 따로 만들어준다.
+    .Make Router & Controller for each domain => Routers Module을 따로 만들어 주고 Controller(Handler) Module를 따로 만들어준다.

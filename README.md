@@ -12,7 +12,7 @@
 ### User Router
 
 /user/edit => Edit user
-/user/delete => Delete user
+/user/remove => Remove user
 
 ### Video Router
 

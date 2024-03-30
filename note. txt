@@ -14,6 +14,8 @@
 
 . Start Building Server with Express
     ### useful package : morgan => HTTP request logger middleware for node.js
-    .Thinking about domain url
-    .Make Router & Controller for each domain => Routers Module을 따로 만들어 주고 Controller(Handler) Module를 따로 만들어준다.
-    
+    . Thinking about domain url
+    . Make Router & Controller for each domain => Routers Module을 따로 만들어 주고 Controller(Handler) Module를 따로 만들어준다.
+    . Install Pug & set engine in express to write for HTML 
+        - make views Folder => views 라는 폴더는 유저가 보게 될 파일들을 넣어주는 곳이다. "views"라고 폴더 이름을 짓고 pug, html 등 파일을 폴더안에 만들어 주면 express 에서 views에 있는 파일들을 보여줄 것이다.
+        - Set view engine => app.set("view engine", "pug"); view 엔진은 pug파일이라고 알려줘야 된다!

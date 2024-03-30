@@ -13,5 +13,6 @@
       nodemon을 사용하면 npm run dev를 입력할 필요없이 변경사항이 있으면 자동으로 재실행 해준다.
 
 . Start Building Server with Express
-
-### useful package : morgan => HTTP request logger middleware for node.js
+    ### useful package : morgan => HTTP request logger middleware for node.js
+    .Thinking about domain url
+    .Make Router for each domain => Routers Module을 따로 만들어 주고 Controller(Handler) Module를 따로 만들어준다.

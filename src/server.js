@@ -13,7 +13,7 @@ app.use(logger);
 const PORT = 4000;
 
 app.use("/", globalRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
 

@@ -20,3 +20,6 @@
         - make views Folder => views 라는 폴더는 유저가 보게 될 파일들을 넣어주는 곳이다. "views"라고 폴더 이름을 짓고 pug, html 등 파일을 폴더안에 만들어 주면 express 에서 views에 있는 파일들을 보여줄 것이다.
         - views 폴더가 있는 Directories 지정 => app.set("views", process.cwd() + "/views");
         - Set view engine => app.set("view engine", "pug"); view 엔진은 pug파일이라고 알려줘야 된다!
+    . Writing HTML by pug 
+        ### include 를 통해서 계속 반복되는 코드를 줄일 수 있다. ex) nav, footer, menu ect...
+    . MVP.css => css는 나중에 백엔드를 하고 추가하기 때문에 MVP.css를 추가해 주면서 못생긴 html을 조금이나마 이쁘게 만들어주면서 진행할 수 있다.

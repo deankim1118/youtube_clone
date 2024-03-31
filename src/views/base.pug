@@ -6,7 +6,18 @@ html(lang="en")
         title #{pageTitle} | Wetube
         link(rel="stylesheet" href="https://unpkg.com/mvp.css")
     body 
-        block content
-        input(type=text, placeholder="Enter your name")
-        button Log in
+        header 
+            if fakeUser.loggedIn 
+                small Hello, #{fakeUser.userName}
+            nav 
+                ul 
+                    if fakeUser.loggedIn
+                        li 
+                            a(href="/login") Log out
+                    else
+                        li 
+                            a(href="/login") Login
+            h1= pageTitle
+        main 
+            block content
     include partials/footer.pug

@@ -1,5 +1,5 @@
 import express from "express";
-import {watch, getEdit, postEdit} from "../controllers/videoController"
+import {watch, getEdit, postEdit, getUpload, postUpload} from "../controllers/videoController"
 
 const videoRouter = express.Router();
 
@@ -7,7 +7,7 @@ const videoRouter = express.Router();
 // :id가 들어간 라우터가 항상 밑에 들어가야 된다! 그렇지 않으면 /upload도 :id (Parameter)로 인식하게 되서 에러가 난다!!
 videoRouter.get('/:id(\\d+)', watch);
 videoRouter.route('/:id(\\d+)/edit').get(getEdit).post(postEdit);
-
+videoRouter.route('/upload').get(getUpload).post(postUpload);
 
 // export default videoRouter;
 module.exports = videoRouter;

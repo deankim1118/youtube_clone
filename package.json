@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/deankim1118/youtube_clone#readme",
   "dependencies": {
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "mongoose": "^8.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.24.3",

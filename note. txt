@@ -1,10 +1,15 @@
 . Install Node.js
+
 . git init -> git remote add origin ${url}
+
 . Install Express package using NPM
+
 . NPM init
+
 . Install Babel package => 최선 버전의 자바스크립트를 안정적인 버전으로 컨버트 해준다. -> Doc 참조.
     - npm install @babel/node --save-dev 도 인스톨 해준다.
     - add env preset & Create babel.config.json 
+
 . Install Nodemon package
     - package.json 에 scripts 추가 
     -  "scripts": {
@@ -23,3 +28,9 @@
     . Writing HTML by pug 
         ### include 를 통해서 계속 반복되는 코드를 줄일 수 있다. ex) nav, footer, menu ect...
     . MVP.css => css는 나중에 백엔드를 하고 추가하기 때문에 MVP.css를 추가해 주면서 못생긴 html을 조금이나마 이쁘게 만들어주면서 진행할 수 있다.
+
+. Install MongoDB and Mongosh and Moongoose
+. Working with Moongoose Data base
+    - import db.js into server.js => import 만 하면 자동으로 실행된다.
+    - Build Schema & Model
+    - Build "CRUD"

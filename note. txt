@@ -34,3 +34,4 @@
     - import db.js into server.js => import 만 하면 자동으로 실행된다.
     - Build Schema & Model
     - Build "CRUD"
+    - Build middleware ### middleware 모델 전에 만들어서 실행되야 된다. ### static은 파이썬 클래스로 치면 Class.method를 추가하는 거다.

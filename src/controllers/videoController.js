@@ -19,9 +19,10 @@ export const home = async (req, res) => {
         return console.log("errors : ", err);
     }
 }; 
-export const watch = (req, res) => { 
+export const watch = async (req, res) => { 
     const { id } = req.params;
-    return res.render("watch", {pageTitle: `Watching `});
+    const video = await Video.findById(id).exec();
+    return res.render("watch", {pageTitle: `Watching `, video});
 };
 export const getEdit = (req, res) => {
     const { id } = req.params;

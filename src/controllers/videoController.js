@@ -9,13 +9,14 @@ export const home = async (req, res) => {
     // .catch((err) => {
     //     console.log("error : ", err);
     // });
+    
     try {
         const videos = await Video.find({});
         // render 1번째 Parameter는 "home.pug" view engine의 파일 이름을 넣어준다.
         // render 2번째에 Parameter에 pug에서 사용할 변수를 보내줄 수 있다. ex) {pageTitle: "Home", userDataObject}
         return res.render("home", {pageTitle: "Home", videos});
     } catch(err) {
-        return consolo.log("errors : ", err);
+        return console.log("errors : ", err);
     }
 }; 
 export const watch = (req, res) => { 
@@ -32,12 +33,23 @@ export const postEdit = (req, res) => {
     return res.redirect(`/videos/${id}`);
 };
 
-export const getUpload = (req, res) => {
+export const getUpload = async (req, res) => {
     return res.render("upload", {pageTitle: `Upload Videos`});
 };
-export const postUpload = (req, res) => {
-    const { title } = req.body;
-    // here we will add a video to the videos array.
-
-    return res.redirect("/");
+export const postUpload = async (req, res) => {
+    const { title, description, hashtags } = req.body;
+    try {
+        // here we will add a video to the videos array.
+        const video = new Video({
+            title: title,
+            description: description,
+            hashtags: hashtags.split(',').map((word) => `#${word}`),
+        });
+        await video.save();
+        return res.redirect("/");
+    } catch(err) {
+        console.log(err);
+        return res.render("upload", {pageTitle: `Upload Videos`, errorMessage: err._message});
+    }
+    
 };

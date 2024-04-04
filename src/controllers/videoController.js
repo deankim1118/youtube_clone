@@ -11,7 +11,7 @@ export const home = async (req, res) => {
     // });
     
     try {
-        const videos = await Video.find({});
+        const videos = await Video.find({}).sort({createdAt: -1});
         // render 1번째 Parameter는 "home.pug" view engine의 파일 이름을 넣어준다.
         // render 2번째에 Parameter에 pug에서 사용할 변수를 보내줄 수 있다. ex) {pageTitle: "Home", userDataObject}
         return res.render("home", {pageTitle: "Home", videos});
@@ -77,4 +77,19 @@ export const deleteVideo = async (req, res) => {
     // delete video
     await Video.findByIdAndDelete(id);
     return res.redirect("/");
+};
+
+export const search = async (req, res) => {
+    const { keyword } = req.query;
+    let videos = [];
+    if (keyword) {
+        // search
+        const videos = await Video.find({
+            title: {
+                $regex: new RegExp(keyword, "i"),
+            }
+        });
+        return res.render("search", {pageTitle: `Search`, videos});
+    }
+    return res.render("search", {pageTitle: `Search`, videos});
 };

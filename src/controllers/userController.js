@@ -1,4 +1,5 @@
 import User from '../models/User';
+import bcrypt from 'bcrypt';
 
 export const getJoin = (req, res) => {
   res.render('join', { pageTitle: 'Create Account' });
@@ -8,13 +9,13 @@ export const postJoin = async (req, res) => {
   const pageTitle = 'Join';
   const exists = await User.exists({ $or: [{ username }, { email }] });
   if (password !== password2) {
-    return res.render('join', {
+    return res.status(400).render('join', {
       pageTitle,
       errorMessage: 'Password is not match',
     });
   }
   if (exists) {
-    return res.render('join', {
+    return res.status(400).render('join', {
       pageTitle,
       errorMessage: 'This Email/Username is already taken',
     });
@@ -29,17 +30,41 @@ export const postJoin = async (req, res) => {
     });
     return res.redirect('/login');
   } catch (err) {
-    return console.log('errors : ', err);
+    return res
+      .status(404)
+      .render('join', { pageTitle: 'Join', errorMessage: err._message });
   }
+};
+export const getLogin = (req, res) => {
+  res.status(200).render('login', { pageTitle: 'Login' });
+};
+
+export const postLogin = async (req, res) => {
+  const { username, password } = req.body;
+  const pageTitle = 'Login';
+  const user = await User.findOne({ username });
+  if (!user) {
+    return res.status(400).render('login', {
+      pageTitle,
+      errorMessage: "username doesn't exist",
+    });
+  }
+  // check if password exists
+  console.log(user);
+  const match = await bcrypt.compare(password, user.password);
+  if (!match) {
+    return res.status(400).render('login', {
+      pageTitle,
+      errorMessage: 'Wrong password',
+    });
+  }
+  return res.redirect('/');
 };
 export const edit = (req, res) => {
   res.send('User Edit');
 };
 export const remove = (req, res) => {
   res.send('Remove User');
-};
-export const login = (req, res) => {
-  res.send('Login');
 };
 export const logout = (req, res) => {
   res.send('Logout');

@@ -7,7 +7,7 @@
 . NPM init
 
 . Install Babel package => 최선 버전의 자바스크립트를 안정적인 버전으로 컨버트 해준다. -> Doc 참조.
-    - npm install @babel/node --save-dev 도 인스톨 해준다.
+    - npm install @babel/core @babel/node --save-dev
     - add env preset & Create babel.config.json 
 
 . Install Nodemon package
@@ -16,6 +16,9 @@
             "dev": "nodemon --exec babel-node index.js" }
       이렇게 추가 해주고, 터미널에서 "npm run dev" 를 입력하면 자동으로 babel-node로 index.js를 실행해서 컨버팅해준다.
       nodemon을 사용하면 npm run dev를 입력할 필요없이 변경사항이 있으면 자동으로 재실행 해준다.
+    - dependencies : babel, express, mongoose, nodemon, dotenv
+        ### dotenv: config.env 파일이름으로 중요 String을 저장하면, process.env. 으로 다른곳에서 쓸 수 있다. 
+            #### import 한 후에 -> dotenv.config({ path: './config.env' }); 면 사용가능!
 
 . Start Building Server with Express
     ### useful package : morgan => HTTP request logger middleware for node.js
@@ -31,7 +34,20 @@
 
 . Install MongoDB and Mongosh and Moongoose
 . Working with Moongoose Data base
+    - mongoDB, mongoose database 만들어주고 -> connect
     - import db.js into server.js => import 만 하면 자동으로 실행된다.
     - Build Schema & Model
     - Build "CRUD"
     - Build middleware ### middleware 모델 전에 만들어서 실행되야 된다. ### static은 파이썬 클래스로 치면 Class.method를 추가하는 거다.
+    - Build Routers & Controllers
+    - Test with MongoDB Compass & Postman
+
+. Build with MVC Logic 
+    - Model & Views & Controllers
+
+. Build User Authentication
+    - bcrypt npm package which makes password to hash password & schema.pre() middleware 
+
+
+### Other Stuff to remeber
+    - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!

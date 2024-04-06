@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/deankim1118/youtube_clone#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "mongoose": "^8.2.4"
   },

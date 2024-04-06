@@ -47,6 +47,10 @@
 
 . Build User Authentication
     - bcrypt npm package which makes password to hash password & schema.pre() middleware 
+    - express-session middleware package 를 사용하면 유저가 어느 행동을 할 때마다 session, cookie를 저장한다. 
+        그래서 req.session에 접근할 수 있게 되고 req.session.someproperty 에 데이터를 저장할 수 있다 ex) req.session.loggedIn = true; req.session.user = user;
+    - res.locals 는 express가 제공하는 전역변수이다. 예를 들어 res.locals.loggedInUser = req.session.user; 이렇게 저장하면 pug에서는 
+        #{loggedInUser} 로 property를 사용할 수 있게 된다.
 
 
 ### Other Stuff to remeber

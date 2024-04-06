@@ -50,7 +50,6 @@ export const postLogin = async (req, res) => {
     });
   }
   // check if password exists
-  console.log(user);
   const match = await bcrypt.compare(password, user.password);
   if (!match) {
     return res.status(400).render('login', {
@@ -58,6 +57,8 @@ export const postLogin = async (req, res) => {
       errorMessage: 'Wrong password',
     });
   }
+  req.session.loggedIn = true;
+  req.session.user = user;
   return res.redirect('/');
 };
 export const edit = (req, res) => {

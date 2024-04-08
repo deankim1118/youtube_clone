@@ -18,7 +18,9 @@
       nodemon을 사용하면 npm run dev를 입력할 필요없이 변경사항이 있으면 자동으로 재실행 해준다.
     - dependencies : babel, express, mongoose, nodemon, dotenv
         ### dotenv: config.env 파일이름으로 중요 String을 저장하면, process.env. 으로 다른곳에서 쓸 수 있다. 
-            #### import 한 후에 -> dotenv.config({ path: './config.env' }); 면 사용가능!
+            #### import 한 후에 -> dotenv.config({ path: './config.env' }); 면 사용가능! 
+            #### 제일 먼저 작동하는 파일 제일 위에 한번만 import 해주면 된다!
+            #### import 방식은 다른 패키지와 같은 방식으로 해줘야된다. require로 했으면 모두다 require, import 면 모두다 import
 
 . Start Building Server with Express
     ### useful package : morgan => HTTP request logger middleware for node.js
@@ -51,6 +53,7 @@
         그래서 req.session에 접근할 수 있게 되고 req.session.someproperty 에 데이터를 저장할 수 있다 ex) req.session.loggedIn = true; req.session.user = user;
     - res.locals 는 express가 제공하는 전역변수이다. 예를 들어 res.locals.loggedInUser = req.session.user; 이렇게 저장하면 pug에서는 
         #{loggedInUser} 로 property를 사용할 수 있게 된다.
+    - connect-mongo package. ### 쿠키에는 세션 데이터가 아닌 세션 ID만 저장된다. 세션 데이터는 서버 측에 저장되야한다. 하지만 express-session 의 기본 서버 측 세션 저장소인 MemoryStore는 production 환경용으로 설계되지 않았다. 그래서 다른 호환가능한 세션스토어를 사용해서 db에 저장해야된다. 그래야 서버가 재시작 되더라고 데이터가 사라지지 않는다. 그러나 웹사이트에 방문한 모든 방문자의 session을 저장할 필요는 없다. 비용만 올라간다.
 
 
 ### Other Stuff to remeber

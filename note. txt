@@ -53,8 +53,37 @@
         그래서 req.session에 접근할 수 있게 되고 req.session.someproperty 에 데이터를 저장할 수 있다 ex) req.session.loggedIn = true; req.session.user = user;
     - res.locals 는 express가 제공하는 전역변수이다. 예를 들어 res.locals.loggedInUser = req.session.user; 이렇게 저장하면 pug에서는 
         #{loggedInUser} 로 property를 사용할 수 있게 된다.
-    - connect-mongo package. ### 쿠키에는 세션 데이터가 아닌 세션 ID만 저장된다. 세션 데이터는 서버 측에 저장되야한다. 하지만 express-session 의 기본 서버 측 세션 저장소인 MemoryStore는 production 환경용으로 설계되지 않았다. 그래서 다른 호환가능한 세션스토어를 사용해서 db에 저장해야된다. 그래야 서버가 재시작 되더라고 데이터가 사라지지 않는다. 그러나 웹사이트에 방문한 모든 방문자의 session을 저장할 필요는 없다. 비용만 올라간다.
+    - connect-mongo package. ### 쿠키에는 세션 데이터가 아닌 세션 ID만 저장된다. 세션 데이터는 서버 측에 저장되야한다. 하지만 express-session 의 기본 서버 측 세션 저장소인 MemoryStore는 production 환경용으로 설계되지 않았다. 그래서 다른 호환가능한 세션스토어를 사용해서 db에 저장해야된다. 
+    그래야 서버가 재시작 되더라고 데이터가 사라지지 않는다. 그러나 웹사이트에 방문한 모든 방문자의 session을 저장할 필요는 없다. 비용만 올라간다.
+
+.Github Authentication 
+    - Doc URL: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+    - go to settings -> delveloper settings -> Register a new application -> callback URL: http://localhost:4000/users/github/finish
+        ### callback URL을 설정해놓으면 Github에서 Authorize가 되면 내가 설정해놓은 콜백url로 userCode Token과 함께 Redirect 해준다.
+    - ### url에 들어갈 configuration Params를 Object로 만들고, new URLSearchParams() 메소드를 사용하면 object를 url로 바꿔준다. 
+        ex) const config = { client_id: 'kookie', scope = 'read:user user:email'} => client_id=&scope=kookie&user:email
+    - github 가 준 userCode Token 을 access token으로 바꿔준다. async await fetch() 를 사용해서 Post로 요청! json()으로 바꿔준다.
+    - Use the access token to access the API
 
 
 ### Other Stuff to remeber
     - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!
+
+
+###  All using Packages
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.2.4",
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.3",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.3",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.0",
+    "pug": "^3.0.2"
+  }

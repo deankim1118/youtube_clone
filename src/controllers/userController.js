@@ -56,6 +56,11 @@ export const postLogin = async (req, res) => {
       pageTitle,
       errorMessage: 'Wrong password',
     });
+  } else if (user.socialOnly === true) {
+    return res.status(400).render('login', {
+      pageTitle,
+      errorMessage: 'Use Social Login',
+    });
   }
   req.session.loggedIn = true;
   req.session.user = user;

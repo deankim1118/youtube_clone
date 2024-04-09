@@ -21,7 +21,7 @@ app.use(
   session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    saveUninitialized: false, // save only I create or modify the sessionsc
+    saveUninitialized: false, // save only I create or modify the sessions
     cookie: {
       maxAge: 20000,
     },

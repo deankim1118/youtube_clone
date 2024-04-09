@@ -66,6 +66,7 @@
     - Use the access token to access the Github API
         ### user의 정보를 어느정도 가져오느냐는 처음 로그인 url 보낼 때 scope: 설정하느냐에 달려있다
     - Github 에서 가져온 email 정도가 이미 MongoDB에 있는지 확인을 해야된다! 이미 로그인 email이 있으면 어떻게 할 지 결정해야된다.
+    - req.session.detroy() 해주면 session을 지우면서 Logout 이 된다.
 
 
 

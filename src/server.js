@@ -23,7 +23,7 @@ app.use(
     resave: false,
     saveUninitialized: false, // save only I create or modify the sessions
     cookie: {
-      maxAge: 20000,
+      maxAge: 2000000,
     },
     store: MongoStore.create({
       mongoUrl: process.env.DB_URL,

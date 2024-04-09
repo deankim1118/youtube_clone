@@ -68,6 +68,11 @@
     - Github 에서 가져온 email 정도가 이미 MongoDB에 있는지 확인을 해야된다! 이미 로그인 email이 있으면 어떻게 할 지 결정해야된다.
     - req.session.detroy() 해주면 session을 지우면서 Logout 이 된다.
 
+.User Profile
+    - 직접 만들었던 middleware에서 로그인 하면 locals 에 req.session.user 정보를  저장되게 해놨기 때문에  pug에 locals에서 직접 데이터를 가져올 수 있다.
+
+.Custom URL Middleware
+    - 예를 들어, 로그인 안 한 유저가 edit profile page를 url로 그냥 들어가게 되었을 때 edit profile page가 보이면 안된다. 그래서 middleware를 만들어서 다른 url로 res.redirect 하게 해준다. middleware 는 라우터에서 Handler 옆에서 사용할 수 있다.
 
 
 ### Other Stuff to remeber

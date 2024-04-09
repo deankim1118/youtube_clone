@@ -63,7 +63,10 @@
     - ### url에 들어갈 configuration Params를 Object로 만들고, new URLSearchParams() 메소드를 사용하면 object를 url로 바꿔준다. 
         ex) const config = { client_id: 'kookie', scope = 'read:user user:email'} => client_id=&scope=kookie&user:email
     - github 가 준 userCode Token 을 access token으로 바꿔준다. async await fetch() 를 사용해서 Post로 요청! json()으로 바꿔준다.
-    - Use the access token to access the API
+    - Use the access token to access the Github API
+        ### user의 정보를 어느정도 가져오느냐는 처음 로그인 url 보낼 때 scope: 설정하느냐에 달려있다
+    - Github 에서 가져온 email 정도가 이미 MongoDB에 있는지 확인을 해야된다! 이미 로그인 email이 있으면 어떻게 할 지 결정해야된다.
+
 
 
 ### Other Stuff to remeber

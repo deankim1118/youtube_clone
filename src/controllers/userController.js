@@ -144,38 +144,22 @@ export const finishGithubLogin = async (req, res) => {
 export const getEdit = (req, res) => {
   return res.render('edit-profile', { pageTitle: 'Edit Profile' });
 };
+
 export const postEdit = async (req, res) => {
   const {
     session: {
-      user: { _id, sessionUsername, sessionEmail },
+      user: { _id },
     },
-    body: { name, email, username, location },
+    body: { inputName, inputEmail, inputUsername, inputLocation },
   } = req;
-
-  if (username != sessionUsername) {
-    const usernameExists = await User.exists({ username });
-    if (usernameExists) {
-      return res.status(400).render('edit-profile', {
-        errorMessage: 'This Username is already exists',
-      });
-    }
-  }
-  if (username != sessionEmail) {
-    const userEmailExists = await User.exists({ email });
-    if (userEmailExists) {
-      return res.status(400).render('edit-profile', {
-        errorMessage: 'This Email is already exists',
-      });
-    }
-  }
 
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      name,
-      email,
-      username,
-      location,
+      name: inputName,
+      email: inputEmail,
+      username: inputUsername,
+      location: inputLocation,
     },
     { new: true }
   );
@@ -187,6 +171,43 @@ export const logout = (req, res) => {
   req.session.destroy();
   return res.redirect('/');
 };
+
+export const getChangePassword = (req, res) => {
+  return res.render('users/change-password', {
+    pageTitle: 'Change Password',
+  });
+};
+
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPassword2 },
+  } = req;
+  const user = await User.findById(_id);
+
+  const match = await bcrypt.compare(oldPassword, user.password);
+  if (!match) {
+    return res.status(400).render('users/change-password', {
+      pageTitle: 'Change Password',
+      errorMessage: 'Current password is not correct',
+    });
+  }
+
+  if (newPassword !== newPassword2) {
+    return res.status(400).render('users/change-password', {
+      pageTitle: 'Change Password',
+      errorMessage: 'The password does not match with the confirmation',
+    });
+  }
+
+  user.password = newPassword;
+  user.save();
+
+  return res.redirect('/users/logout');
+};
+
 export const see = (req, res) => {
   res.send(`User Id is #${req.params.id}`);
 };

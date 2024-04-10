@@ -3,7 +3,7 @@ import {
   protectorMiddleware,
   publicOnlyMiddleware,
   checkUserMiddleware,
-  uploadFiles,
+  avatarUpload,
 } from '../middlewares';
 import {
   logout,
@@ -24,7 +24,7 @@ userRouter
   .route('/edit')
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(uploadFiles.single('avatar'), checkUserMiddleware, postEdit);
+  .post(avatarUpload.single('avatar'), checkUserMiddleware, postEdit);
 
 userRouter.get('/github/start', publicOnlyMiddleware, startGithubLogin);
 

@@ -50,4 +50,15 @@ export const checkUserMiddleware = (req, res, next) => {
   }
 };
 
-export const uploadFiles = multer({ dest: 'uploads/' });
+export const avatarUpload = multer({
+  dest: 'uploads/avartar',
+  limits: {
+    fileSize: 3000000,
+  },
+});
+export const videoUpload = multer({
+  dest: 'uploads/videos',
+  limits: {
+    fileSize: 10000000,
+  },
+});

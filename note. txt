@@ -77,6 +77,8 @@
     - use multer middleware npm package
     - Database 에는 절대 파일을 저장하지 않는다!! 파일경로만 저장하는거다!!
     - multer 에서 설정한 destination을 express에 알려줘야 된다. 그래서 app.use(destinationURL, express.static(root directory))을 해주면 폴더가 있는 곳에서 파일을 읽는다.
+    - enctype='multipart/form-data' form encoding type을 꼭 입력해줘야된다.
+    - filesize limit 도 걸 수 있고, 많은 옵션이 있다. Multer Doc 참조!
     - 서버가 재시작되거나 업데이트 하면 모든 파일을 다 날리게 된다. 그래서 파일은 다른 안전한 곳에 저장해야된다.
 
 .Custom URL Middleware

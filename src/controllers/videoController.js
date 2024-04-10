@@ -53,13 +53,16 @@ export const postEdit = async (req, res) => {
 export const getUpload = async (req, res) => {
   return res.render('upload', { pageTitle: `Upload Videos` });
 };
+
 export const postUpload = async (req, res) => {
+  const file = req.file;
   const { title, description, hashtags } = req.body;
   try {
     // here we will add a video to the videos array.
     const video = new Video({
       title: title,
       description: description,
+      fileUrl: file.path,
       hashtags: Video.formatHashtags(hashtags),
     });
     await video.save();

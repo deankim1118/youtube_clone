@@ -73,6 +73,12 @@
     - User Profile을 Update 해줄 때 user.session.user 정보도 update 해줘야 된다. findByIdAndUpdate(id, {new: true})라고 적어주면 update 된 새로운 document 를 리턴하고 그걸로 update 해주면 된다.
     - Change Password: #### save() or create() 을 하면 password hash를 하는 미들웨어를 만들어놨기 때문에.. update password를 하고 save()만 해주면 된다.
 
+.File Upload
+    - use multer middleware npm package
+    - Database 에는 절대 파일을 저장하지 않는다!! 파일경로만 저장하는거다!!
+    - multer 에서 설정한 destination을 express에 알려줘야 된다. 그래서 app.use(destinationURL, express.static(root directory))을 해주면 폴더가 있는 곳에서 파일을 읽는다.
+    - 서버가 재시작되거나 업데이트 하면 모든 파일을 다 날리게 된다. 그래서 파일은 다른 안전한 곳에 저장해야된다.
+
 .Custom URL Middleware
     - 예를 들어, 로그인 안 한 유저가 edit profile page를 url로 그냥 들어가게 되었을 때 edit profile page가 보이면 안된다. 그래서 middleware를 만들어서 다른 url로 res.redirect 하게 해준다. middleware 는 라우터에서 Handler 옆에서 사용할 수 있다.
 
@@ -89,6 +95,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "mongoose": "^8.2.4",
+    "multer": "^1.4.5-lts.1",
   },
   "devDependencies": {
     "@babel/core": "^7.24.3",

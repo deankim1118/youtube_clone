@@ -1,4 +1,5 @@
 import User from './models/User';
+import multer from 'multer';
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -33,8 +34,9 @@ export const checkUserMiddleware = (req, res, next) => {
       return res.status(400).render('edit-profile', {
         errorMessage: 'This Username is already exists',
       });
+    } else {
+      return next();
     }
-    return next();
   }
   if (email !== inputEmail) {
     const userEmailExists = User.exists({ inputEmail });
@@ -43,6 +45,9 @@ export const checkUserMiddleware = (req, res, next) => {
         errorMessage: 'This Email is already exists',
       });
     }
+  } else {
     return next();
   }
 };
+
+export const uploadFiles = multer({ dest: 'uploads/' });

@@ -3,6 +3,7 @@ import {
   protectorMiddleware,
   publicOnlyMiddleware,
   checkUserMiddleware,
+  uploadFiles,
 } from '../middlewares';
 import {
   logout,
@@ -18,18 +19,23 @@ import {
 const userRouter = express.Router();
 
 userRouter.get('/logout', protectorMiddleware, logout);
+
 userRouter
   .route('/edit')
   .all(protectorMiddleware)
   .get(getEdit)
-  .post(checkUserMiddleware, postEdit);
+  .post(uploadFiles.single('avatar'), checkUserMiddleware, postEdit);
+
 userRouter.get('/github/start', publicOnlyMiddleware, startGithubLogin);
+
 userRouter.get('/github/finish', publicOnlyMiddleware, finishGithubLogin);
+
 userRouter
   .route('/change-password')
   .all(protectorMiddleware)
   .get(getChangePassword)
   .post(postChangePassword);
+
 // Add Regular Expression (\\d+) to get only NUMBER Id
 userRouter.get('/:id(\\d+)', see);
 

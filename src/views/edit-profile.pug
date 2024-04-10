@@ -3,7 +3,10 @@ extends base
 block content   
     if errorMessage 
         span= errorMessage
-    form(method='POST')
+    img(src= '/' + loggedInUser.avatar_url, width='100px', height='100px')
+    form(method='POST', enctype='multipart/form-data')
+        label(for='avatar') Avatar 
+        input(type='file', id='avatar', name='avatar', accept='image/*')
         input(placeholder='Name',name='inputName', type='text', requird, value=loggedInUser.name) 
         input(placeholder='Email',name='inputEmail', type='email', requird, value=loggedInUser.email) 
         input(placeholder='Username',name='inputUsername', type='text', requird, value=loggedInUser.username) 

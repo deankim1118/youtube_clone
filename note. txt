@@ -72,6 +72,7 @@
     - 직접 만들었던 middleware에서 로그인 하면 locals 에 req.session.user 정보를  저장되게 해놨기 때문에  pug에 locals에서 직접 데이터를 가져올 수 있다.
     - User Profile을 Update 해줄 때 user.session.user 정보도 update 해줘야 된다. findByIdAndUpdate(id, {new: true})라고 적어주면 update 된 새로운 document 를 리턴하고 그걸로 update 해주면 된다.
     - Change Password: #### save() or create() 을 하면 password hash를 하는 미들웨어를 만들어놨기 때문에.. update password를 하고 save()만 해주면 된다.
+    - profile은 누구나 볼 수 있어야 하므로 session에서 id를 가져오지 않고 url에서 id를 가져온다
 
 .File Upload
     - use multer middleware npm package
@@ -80,6 +81,14 @@
     - enctype='multipart/form-data' form encoding type을 꼭 입력해줘야된다.
     - filesize limit 도 걸 수 있고, 많은 옵션이 있다. Multer Doc 참조!
     - 서버가 재시작되거나 업데이트 하면 모든 파일을 다 날리게 된다. 그래서 파일은 다른 안전한 곳에 저장해야된다.
+
+.Video Owner
+    - Video.Schema 에 owner가 누구인지 User의 Id 를 넣어줘야 된다. type은 몽구스가 지원하는 id 타입이고 ref는 내가 만든 user의 모델이름을 입력한다.
+        ### { type: mongoose.Schema.ObjectId, required: true, ref: 'User' } 
+    - 그래서 session.user.id 와 Video.Schema.owner 에 있는 id를 비교해서 Video Owner에게만 편집기능을 보여준다!
+    - Video.findById(id).populate('owner') 같이 populate() 메소드를 써주면 Video Model -> owner propety -> owner ref: 'User Model' 을 찾는다 그래서 owner 에 User 모델 정보가 들어오게 되서 User모델을 따로 불러와서 id를 찾을 필요없이 Video.owner._id 로 바로 찾을 수 있게된다.
+    - User model 에는 videos: [{ type: mongoose.Schema.ObjectId, ref: 'Video' }] 로 설정해 주면 Video Model의 id가 들어간 array로 채워주면 upload 한 모든 비디오 url을 데이터베이스에 넣을 수 있다.
+        ### Video 를 create 할 때 마다 push로 user.videos array 에 넣어줘야된다.
 
 .Custom URL Middleware
     - 예를 들어, 로그인 안 한 유저가 edit profile page를 url로 그냥 들어가게 되었을 때 edit profile page가 보이면 안된다. 그래서 middleware를 만들어서 다른 url로 res.redirect 하게 해준다. middleware 는 라우터에서 Handler 옆에서 사용할 수 있다.

@@ -37,7 +37,7 @@ userRouter
   .post(postChangePassword);
 
 // Add Regular Expression (\\d+) to get only NUMBER Id
-userRouter.get('/:id(\\d+)', see);
+userRouter.get('/:id([0-9a-fA-F]{24})', see);
 
 // export default userRouter;
 module.exports = userRouter;

@@ -94,6 +94,15 @@
 .Custom URL Middleware
     - 예를 들어, 로그인 안 한 유저가 edit profile page를 url로 그냥 들어가게 되었을 때 edit profile page가 보이면 안된다. 그래서 middleware를 만들어서 다른 url로 res.redirect 하게 해준다. middleware 는 라우터에서 Handler 옆에서 사용할 수 있다.
 
+.Front end Javascript
+    - 리액트나 리액트네이티브나 거의 모든 프레임워크에 Webpack이 내장되어 있어서 설정을 작성할 일이 없다.
+    - 폴더는 Public 으로 공개되지 않기때문에 express 한테 app.use('/assets`', express.static('assets`')); static() 이라고 요청하면 어떤 폴더를 공개할지 정해주는거다
+    - webpack 설정을 하고 정해진 폴더에 있는 자바스크립트 파일에서 코딩하면 webpack이 인코딩을 해준다. 
+    - 사용할 loader를 설정해줘야된다. babel loader, scss loader
+    - import style.scss file into js file.
+    - MiniCssExtractPlugin를 사용해주면 css file을 js file에서 처리하지 않고 css file을 따로 만들어준다.
+    - pug에 script(src='path of js file) 을 넣어주고 이제 프론트엔드 코딩을 시작!
+    - 프론트 엔드 파일 저장할 때 마다 백엔드 서버가 다시 시작되서 nodemon.json 에 ignore 설정을 해줘야된다.
 
 ### Other Stuff to remeber
     - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!

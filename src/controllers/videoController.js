@@ -91,7 +91,7 @@ export const postUpload = async (req, res) => {
     await video.save();
 
     const user = await User.findById(_id);
-    user.videos.push(video);
+    user.videos.push(video._id);
     await user.save();
 
     return res.redirect('/');
@@ -109,7 +109,8 @@ export const deleteVideo = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
-  const video = await User.findById(id);
+  const video = await Video.findById(id);
+
   if (!video) {
     return res.status(404).render('404', { pageTitle: 'Video not found' });
   }
@@ -120,6 +121,10 @@ export const deleteVideo = async (req, res) => {
 
   // delete video
   await Video.findByIdAndDelete(id);
+
+  const user = await User.findById(_id);
+  user.videos.pop(video._id);
+  await user.save();
 
   return res.redirect('/');
 };

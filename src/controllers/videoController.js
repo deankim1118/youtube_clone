@@ -11,7 +11,9 @@ export const home = async (req, res) => {
   // });
 
   try {
-    const videos = await Video.find({}).sort({ createdAt: -1 });
+    const videos = await Video.find({})
+      .sort({ createdAt: -1 })
+      .populate('owner');
     // render 1번째 Parameter는 "home.pug" view engine의 파일 이름을 넣어준다.
     // render 2번째에 Parameter에 pug에서 사용할 변수를 보내줄 수 있다. ex) {pageTitle: "Home", userDataObject}
     return res.render('home', { pageTitle: 'Home', videos });

@@ -3,7 +3,6 @@ import { home, search } from '../controllers/videoController';
 import { publicOnlyMiddleware } from '../middlewares';
 import {
   getJoin,
-  login,
   postJoin,
   getLogin,
   postLogin,

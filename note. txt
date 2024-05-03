@@ -114,6 +114,10 @@
     - 그리고 front-end에서 fetch(back-end url)로 보내주면 back-end 에서 rendering 없이 그냥 database 에 view +1을 하라는 명령을 실행한다.
     - 그냥 res.status(200) 으로만 보내면 아무것도 하지 않는다. res.sendStatus(200) 로 해줘야 상태코드를 보내고 연결을 끊는다.
 
+. leave message to user
+    - express-flash npm-package를 이용해서 유저에게 메세지를 알람을 보낼 수 있다.
+    - req.flash('error', 'message') 이런식으로 만들면 locals.message 를 만든다. 그래서 message.error 를 사용해서 views(pug)에서 사용할 수 있게 된다.
+
 ### Other Stuff to remeber
     - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!
 

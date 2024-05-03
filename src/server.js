@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import flash from 'express-flash';
 import rootRouter from './routers/rootRouter';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
@@ -31,6 +32,7 @@ app.use(
     }),
   })
 );
+app.use(flash());
 app.use(localsMiddleware);
 app.use('/uploads', express.static('uploads'));
 app.use('/assets', express.static('assets'));

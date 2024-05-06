@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String },
   name: { type: String, required: true },
   location: String,
+  comments: [{ type: mongoose.Schema.ObjectId, ref: 'Comment' }],
   videos: [{ type: mongoose.Schema.ObjectId, ref: 'Video' }],
 });
 
@@ -20,4 +21,4 @@ userSchema.pre('save', async function () {
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;

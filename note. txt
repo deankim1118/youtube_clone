@@ -125,6 +125,7 @@
     - 그래서 app.use(express.json()) 미들웨어를 사용해주고 프론트엔드에서 fetch() 안에 headers: { 'Content-Type': 'application/json' }라고 작성해서 백엔드에 json을 보낸다고 알려주고, text인 object를 json 으로 바꿔주게 된다. 그럼 올바르고 obj.text로 각자의 property에 접근이 가능하게 된다. 
     - 결론은, front-end에서 request 보낼때는 JSON.syringfy({}) 로 object를 text로 바꿔서 보내주고, headers: { 'Content-Type': 'application/json' }라고 작성해서 백엔드에 json을 보낸다고 알려주고, back-end에서는 app.use(express.json())으로 받아서 다시 object json으로 바꿔준다.
     - But, 댓글이 실시간으로 프론트엔드에 보이지 않는다. page를 항상 reload 해줘야된다. 그래서 Javascript로 똑같은 HTML 구조를 만들어서 프론트엔드에 추가해 주면 백엔드에 저장하진 않지만 빠르게 실시간으로 보여지게 된다. 그러면 reload를 할 필요없이 실시간으로 보여지는 효과를 만들어 줄 수 있다.
+    - But, 프론트엔드에서만 보여주는 Fake Comments 를 만들면 dataset id(==Comment._id)가 없어서 Delete, Edit 할 수가 없다. 그래서 백엔드에서 res.status(201).json({ newCommentId: comment._id }); json으로 response를 보내주고, 프론트엔드에서 const { newCommentId } = await response.json(); json으로 response를 받아서 HTML의 Dataset 에 id를 추가해주면 개별 id를 통해서 수정하거나 지울 수 있다.
 
 ### Other Stuff to remeber
     - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!

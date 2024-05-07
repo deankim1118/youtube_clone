@@ -37,7 +37,7 @@ block content
     .video__comments 
         ul 
             each comment in video.comments.reverse()
-                li.video__comment
+                li.video__comment(data-id=comment._id)
                     span= comment.text
 
 block scripts 

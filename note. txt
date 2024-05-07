@@ -118,6 +118,14 @@
     - express-flash npm-package를 이용해서 유저에게 메세지를 알람을 보낼 수 있다.
     - req.flash('error', 'message') 이런식으로 만들면 locals.message 를 만든다. 그래서 message.error 를 사용해서 views(pug)에서 사용할 수 있게 된다.
 
+.Comments 
+    - front-end에서 back-end server로 그냥 text를 보내면 이해하지 못한다. 그래서 server.js에서 app.use(express.text()) 라고 미들웨어를 써주면 text를 이해할 수 있게 된다.
+    - 그러나 data가 여러개 있어서 object 안에 있는 text를 보내게 되면 이해할 수 없게 된다. 그래서 JSON.syringfy({})를 써주면 js object를 String으로 바꿔준다. request를 보낼때는 object를 string으로 보내준다.
+    - app.use(express.text()) 미들웨어는 text data 한개만을 보낼 때는 괜찮지만, object를 보낼때는 사용할 수 없게된다.
+    - 그래서 app.use(express.json()) 미들웨어를 사용해주고 프론트엔드에서 fetch() 안에 headers: { 'Content-Type': 'application/json' }라고 작성해서 백엔드에 json을 보낸다고 알려주고, text인 object를 json 으로 바꿔주게 된다. 그럼 올바르고 obj.text로 각자의 property에 접근이 가능하게 된다. 
+    - 결론은, front-end에서 request 보낼때는 JSON.syringfy({}) 로 object를 text로 바꿔서 보내주고, headers: { 'Content-Type': 'application/json' }라고 작성해서 백엔드에 json을 보낸다고 알려주고, back-end에서는 app.use(express.json())으로 받아서 다시 object json으로 바꿔준다.
+    - But, 댓글이 실시간으로 프론트엔드에 보이지 않는다. page를 항상 reload 해줘야된다. 그래서 Javascript로 똑같은 HTML 구조를 만들어서 프론트엔드에 추가해 주면 백엔드에 저장하진 않지만 빠르게 실시간으로 보여지게 된다. 그러면 reload를 할 필요없이 실시간으로 보여지는 효과를 만들어 줄 수 있다.
+
 ### Other Stuff to remeber
     - req.params or req.query 에서 숫자는 모두 String 이다. 그래서 계산을 할려면 *1 을 해주면 Number로 타입이 자동으로 바뀐다!
 

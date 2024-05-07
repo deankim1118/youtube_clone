@@ -19,6 +19,7 @@ app.set('views', process.cwd() + '/src/views');
 app.set('view engine', 'pug');
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.json());
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
